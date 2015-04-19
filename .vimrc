@@ -77,7 +77,8 @@ set nowrap
 
 " Solarized color scheme
 syntax on
-se t_Co=256
+set term=screen-256color-bce
+set t_Co=256
 let g:solarized_termcolors=16
 set background=dark
 colorscheme solarized
@@ -155,8 +156,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <F9> :SyntasticCheck<CR>
 nnoremap <F10> :SyntasticToggleMode<CR>
-
-
 
 
 set tags+=tags;$HOME
