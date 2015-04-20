@@ -33,7 +33,7 @@ function MapToggle(key, opt)
 endfunction
 command -nargs=+ MapToggle call MapToggle(<f-args>)
 MapToggle <F2> hlsearch
-
+set pastetoggle=<F3>
 
 " =============================================
 " Backup
@@ -75,12 +75,15 @@ set backspace=indent,eol,start
 " Don't wrap lines by default
 set nowrap
 
+" Column with indication
+set colorcolumn=80
+
 " Solarized color scheme
 syntax on
 set term=screen-256color-bce
 set t_Co=256
 let g:solarized_termcolors=16
-set background=dark
+set background=light
 colorscheme solarized
 
 
