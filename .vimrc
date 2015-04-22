@@ -14,7 +14,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/syntastic'
-"Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'bling/vim-airline'
+" Plugin 'git://git.wincent.com/command-t.git'
 
 
 call vundle#end()
@@ -26,14 +27,14 @@ filetype plugin indent on
 " Toggles
 " =============================================
 " Map key to toggle opt
-function MapToggle(key, opt)
-  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-  exec 'nnoremap '.a:key.' '.cmd
-  exec 'inoremap '.a:key." \<C-O>".cmd
-endfunction
-command -nargs=+ MapToggle call MapToggle(<f-args>)
-MapToggle <F2> hlsearch
-set pastetoggle=<F3>
+"function MapToggle(key, opt)
+"  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+"  exec 'nnoremap '.a:key.' '.cmd
+"  exec 'inoremap '.a:key." \<C-O>".cmd
+"endfunction
+"command -nargs=+ MapToggle call MapToggle(<f-args>)
+"MapToggle <F2> hlsearch
+"set pastetoggle=<F3>
 
 " =============================================
 " Backup
@@ -78,6 +79,16 @@ set nowrap
 " Column with indication
 set colorcolumn=80
 
+" Powerline configuration
+set laststatus=2
+set termencoding=utf-8
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_powerline_fonts = 1
+
+
 " Solarized color scheme
 syntax on
 set term=screen-256color-bce
@@ -95,7 +106,7 @@ colorscheme solarized
 set clipboard=unnamed
 
 " Automatically reload vimrc file
-"autocmd! bufwritepost vimrc source %
+"autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
 
 " Recognise *.md flies as markdown
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
