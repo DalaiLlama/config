@@ -16,7 +16,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 " Plugin 'git://git.wincent.com/command-t.git'
-
+Plugin 'tomtom/tcomment_vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -111,7 +111,17 @@ set clipboard=unnamed
 " Recognise *.md flies as markdown
 au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
 
- 
+" Allow Alt key bindings
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
+
+
 " =============================================
 " Key bindings
 " =============================================
@@ -125,23 +135,35 @@ vnoremap <Leader>s :sort<CR>
 " Remove unwanted white spaces
 map <F6> :%s/\s\+$//gc<CR>
 
-" Commenting blocks of code.
-autocmd FileType c,cpp,java,scala let b:comment_leader = '// '
-autocmd FileType sh,ruby,python   let b:comment_leader = '#'
-autocmd FileType conf,fstab       let b:comment_leader = '#'
-autocmd FileType tex              let b:comment_leader = '%'
-autocmd FileType mail             let b:comment_leader = '>'
-autocmd FileType vim              let b:comment_leader = '"'
-noremap <silent> <Leader>j :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-noremap <silent> <Leader>k :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+" " Commenting blocks of code.
+" let b:comment_leader ='// '
+" autocmd FileType c,cpp,java,scala,php   let b:comment_leader = '// '
+" autocmd FileType sh,ruby,python         let b:comment_leader = '# '
+" autocmd FileType fortran                let b:comment_leader = '! '
+" autocmd FileType conf,fstab             let b:comment_leader = '# '
+" autocmd FileType tex,matlab             let b:comment_leader = '% '
+" autocmd FileType mail                   let b:comment_leader = '> '
+" autocmd FileType vim                    let b:comment_leader = '" '
+" " mapping
+" noremap <silent> <Leader>j :<C-B>silent<C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
+" noremap <silent> <Leader>k :<C-B>silent<C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
 " Code block handling
 vnoremap < <gv
 vnoremap > >gv
 
+" Moving lines
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+
+
 " ctags shortcut
-autocmd FileType c,cpp   let b:ctags_kinds = '--c++-kinds=+p'
-autocmd FileType python   let b:ctags_kinds = '--python-kinds=-i'
+autocmd FileType c,cpp          let b:ctags_kinds = '--c++-kinds=+p'
+autocmd FileType python         let b:ctags_kinds = '--python-kinds=-i'
 noremap <F8> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --extra=+q .<CR>
 
 "NERDTree toggle
