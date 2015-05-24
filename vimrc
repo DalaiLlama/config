@@ -94,7 +94,11 @@ syntax on
 set term=screen-256color-bce
 set t_Co=256
 let g:solarized_termcolors=16
-set background=light
+if $THEME == "light"
+    set background=light
+else
+    set background=dark
+endif
 colorscheme solarized
 
 
