@@ -17,6 +17,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 " Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -113,7 +114,7 @@ set foldlevel=1         "this is just what i use
 " =============================================
 "
 " Copy/paste between vim sessions
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Automatically reload vimrc file
 "autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
