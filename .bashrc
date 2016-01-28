@@ -89,7 +89,7 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # tmux -2 session (also for screen)
 export TERM=screen-256color
-export THEME=dark
+export THEME=light
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -132,3 +132,5 @@ if ! shopt -oq posix; then
 fi
 
 fortune | cowsay
+source /home/opt/coverity/rc/cov-platform.rc
+source /home/opt/coverity/rc/cov-analysis.rc

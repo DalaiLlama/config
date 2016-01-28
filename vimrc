@@ -7,17 +7,19 @@ set nocompatible              " be iMproved, required
 filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
-Plugin 'gmarik/vundle'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'scrooloose/syntastic'
-Plugin 'bling/vim-airline'
 " Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'tomtom/tcomment_vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'bling/vim-airline'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'gmarik/vundle'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
 
 call vundle#end()
 filetype plugin indent on
@@ -78,7 +80,8 @@ set backspace=indent,eol,start
 set nowrap
 
 " Column with indication
-set colorcolumn=80
+set colorcolumn=100
+set textwidth=100
 
 " Powerline configuration
 set laststatus=2
@@ -204,5 +207,15 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 nnoremap <F9> :SyntasticCheck<CR>
 nnoremap <F10> :SyntasticToggleMode<CR>
 
+
+" =============================================
+" You Complete Me
+" =============================================
+"
+let g:ycm_confirm_extra_conf = 0
+" Don't load ycm
+let g:loaded_youcompleteme = 1
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 set tags+=tags;$HOME
