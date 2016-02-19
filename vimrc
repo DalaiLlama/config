@@ -16,6 +16,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
+Plugin 'aufgang001/vim-nerdtree_plugin_open'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
@@ -177,8 +178,9 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " ctags shortcut
 autocmd FileType c,cpp          let b:ctags_kinds = '--c++-kinds=+p'
+autocmd FileType java           let b:ctags_kinds = '--java-kinds=+p'
 autocmd FileType python         let b:ctags_kinds = '--python-kinds=-i'
-noremap <F8> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --extra=+q .<CR>
+noremap <F8> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --exclude='.git' --extra=+q .<CR>
 
 "NERDTree toggle
 map <C-n> :NERDTreeToggle<CR>
@@ -217,5 +219,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:loaded_youcompleteme = 1
 
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+
+let g:nerdtree_plugin_open_cmd = 'gnome-open'
 
 set tags+=tags;$HOME
