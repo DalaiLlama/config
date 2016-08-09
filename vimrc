@@ -7,7 +7,7 @@ set nocompatible              " be iMproved, required
 filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
-" Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'wincent/command-t'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
@@ -16,29 +16,18 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'aufgang001/vim-nerdtree_plugin_open'
+Plugin 'ivalkeen/nerdtree-execute'
+" Plugin 'aufgang001/vim-nerdtree_plugin_open'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
+Plugin 'simplyzhao/cscope_maps.vim'
 
 call vundle#end()
 filetype plugin indent on
 
 
-
-" =============================================
-" Toggles
-" =============================================
-" Map key to toggle opt
-"function MapToggle(key, opt)
-"  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-"  exec 'nnoremap '.a:key.' '.cmd
-"  exec 'inoremap '.a:key." \<C-O>".cmd
-"endfunction
-"command -nargs=+ MapToggle call MapToggle(<f-args>)
-"MapToggle <F2> hlsearch
-"set pastetoggle=<F3>
 
 " =============================================
 " Backup
@@ -57,10 +46,13 @@ set encoding=utf-8
 
 " Spelling
 setlocal spell spelllang=en_us
-set nospell
+set spell
 
 " Show line numbers
 set number
+
+" Show relative line numbers
+set relativenumber
 
 " Highlight search
 set hlsearch
@@ -83,6 +75,9 @@ set nowrap
 " Column with indication
 set colorcolumn=100
 set textwidth=100
+
+" Git commit message lines to be 70 char long
+au FileType gitcommit set tw=70
 
 " Powerline configuration
 set laststatus=2
@@ -147,21 +142,27 @@ inoremap jk <Esc>
 " Sort
 vnoremap <Leader>s :sort<CR>
 
-" Remove unwanted white spaces
-map <F6> :%s/\s\+$//gc<CR>
+" " Map key to toggle opt
+" function MapToggle(key, opt)
+"  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
+"  exec 'nnoremap '.a:key.' '.cmd
+"  exec 'inoremap '.a:key." \<C-O>".cmd
+" endfunction
+" command -nargs=+ MapToggle call MapToggle(<f-args>)
+" MapToggle <F2> hlsearch
 
-" " Commenting blocks of code.
-" let b:comment_leader ='// '
-" autocmd FileType c,cpp,java,scala,php   let b:comment_leader = '// '
-" autocmd FileType sh,ruby,python         let b:comment_leader = '# '
-" autocmd FileType fortran                let b:comment_leader = '! '
-" autocmd FileType conf,fstab             let b:comment_leader = '# '
-" autocmd FileType tex,matlab             let b:comment_leader = '% '
-" autocmd FileType mail                   let b:comment_leader = '> '
-" autocmd FileType vim                    let b:comment_leader = '" '
-" " mapping
-" noremap <silent> <Leader>j :<C-B>silent<C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
-" noremap <silent> <Leader>k :<C-B>silent<C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
+" =============================================
+" Tag list
+" =============================================
+"
+let Tlist_Use_Right_Window   = 1
+let Tlist_WinWidth = 50
+nnoremap <F2> :TlistToggle<CR>
+
+set pastetoggle=<F3>
+
+" Remove unwanted white spaces
+map <F4> :%s/\s\+$//gc<CR>
 
 " Code block handling
 vnoremap < <gv
@@ -180,7 +181,7 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 autocmd FileType c,cpp          let b:ctags_kinds = '--c++-kinds=+p'
 autocmd FileType java           let b:ctags_kinds = '--java-kinds=+p'
 autocmd FileType python         let b:ctags_kinds = '--python-kinds=-i'
-noremap <F8> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --exclude='.git' --extra=+q .<CR>
+noremap <F5> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --exclude='.git' --extra=+q . ; find . -type f \( -name "*.java" -or -name "*.aidl" \) > cscope.files ; cscope -b<CR>
 
 "NERDTree toggle
 map <C-n> :NERDTreeToggle<CR>
@@ -190,6 +191,7 @@ let g:xptemplate_key = '<Tab>'
 
 " Find replace word under cursor
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+" nnoremap <Leader>R :bufdo %s/\<<C-r><C-w>\>//gce | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 
 " =============================================
@@ -206,9 +208,13 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <F9> :SyntasticCheck<CR>
-nnoremap <F10> :SyntasticToggleMode<CR>
+" let g:syntastic_java_javac_classpath = $ANDROID_HOME"/platforms/android-6.0.1/*.jar:"$ANDROID_HOME"/plarforms/android-6.0.1/lib/*.jar:./build/intermediates/pre-dexed/standard/debug/*.jar"
+let g:syntastic_java_javac_classpath = "/home/CORPUSERS/23060286/Softdev/sdk/platforms/android-6.0.1/*.jar"
+nnoremap <F8> :SyntasticCheck<CR>
+nnoremap <F7> :SyntasticToggleMode<CR>
 
+map <C-h> 4zh " Scroll 4 characters to the left
+map <C-l> 4zl " Scroll 4 characters to the right
 
 " =============================================
 " You Complete Me
