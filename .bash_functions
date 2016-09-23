@@ -27,9 +27,3 @@ function pngToJpeg() {
         rm "$filename.png"
     done
 }
-
-function SpelensHus()
-{
-    cd /home/andy/Sofdev/playground/SpelensHus/
-    source venv/bin/activate
-}

@@ -5,13 +5,14 @@ set nocompatible              " be iMproved, required
 " =============================================
 "
 filetype off
-set rtp+=~/.vim/bundle/vundle
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'wincent/command-t'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/vundle'
 Plugin 'scrooloose/nerdtree'
@@ -45,8 +46,8 @@ set dir=$HOME/.tmp/vim-swap
 set encoding=utf-8
 
 " Spelling
-setlocal spell spelllang=en_us
-set spell
+" setlocal spell spelllang=en_us
+setlocal spelllang=en_us
 
 " Show line numbers
 set number
@@ -79,7 +80,7 @@ set textwidth=100
 " Git commit message lines to be 70 char long
 au FileType gitcommit set tw=70
 
-" Powerline configuration
+" Airline configuration
 set laststatus=2
 set termencoding=utf-8
 if !exists('g:airline_symbols')
@@ -87,6 +88,9 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 let g:airline_powerline_fonts = 1
+" Remove incorrectly displayed arrows
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 
 " Solarized color scheme
@@ -209,7 +213,7 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 " let g:syntastic_java_javac_classpath = $ANDROID_HOME"/platforms/android-6.0.1/*.jar:"$ANDROID_HOME"/plarforms/android-6.0.1/lib/*.jar:./build/intermediates/pre-dexed/standard/debug/*.jar"
-let g:syntastic_java_javac_classpath = "/home/CORPUSERS/23060286/Softdev/sdk/platforms/android-6.0.1/*.jar"
+" let g:syntastic_java_javac_classpath = "/home/CORPUSERS/23060286/Softdev/sdk/platforms/android-6.0.1/*.jar"
 nnoremap <F8> :SyntasticCheck<CR>
 nnoremap <F7> :SyntasticToggleMode<CR>
 
