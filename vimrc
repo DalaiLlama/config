@@ -7,23 +7,22 @@ set nocompatible              " be iMproved, required
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'wincent/command-t'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/vundle'
+Plugin 'ivalkeen/nerdtree-execute'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'ivalkeen/nerdtree-execute'
-" Plugin 'aufgang001/vim-nerdtree_plugin_open'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'simplyzhao/cscope_maps.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
-Plugin 'simplyzhao/cscope_maps.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'wincent/command-t'
+Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 filetype plugin indent on
@@ -212,10 +211,8 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-" let g:syntastic_java_javac_classpath = $ANDROID_HOME"/platforms/android-6.0.1/*.jar:"$ANDROID_HOME"/plarforms/android-6.0.1/lib/*.jar:./build/intermediates/pre-dexed/standard/debug/*.jar"
-" let g:syntastic_java_javac_classpath = "/home/CORPUSERS/23060286/Softdev/sdk/platforms/android-6.0.1/*.jar"
-nnoremap <F8> :SyntasticCheck<CR>
 nnoremap <F7> :SyntasticToggleMode<CR>
+nnoremap <F8> :SyntasticCheck<CR>
 
 map <C-h> 4zh " Scroll 4 characters to the left
 map <C-l> 4zl " Scroll 4 characters to the right
