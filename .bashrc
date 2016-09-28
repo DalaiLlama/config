@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -93,7 +93,6 @@ export THEME=light
 
 # some more ls aliases
 alias ll='ls -alF'
-
 alias la='ls -A'
 alias l='ls -CF'
 
@@ -132,5 +131,3 @@ if ! shopt -oq posix; then
 fi
 
 fortune | cowsay
-source /home/opt/coverity/rc/cov-platform.rc
-source /home/opt/coverity/rc/cov-analysis.rc
