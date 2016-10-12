@@ -5,24 +5,56 @@ set nocompatible              " be iMproved, required
 " =============================================
 "
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
-Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'editorconfig/editorconfig-vim'
 Plugin 'gmarik/vundle'
-Plugin 'ivalkeen/nerdtree-execute'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
+
+"Visual
 Plugin 'sheerun/vim-polyglot'
-Plugin 'simplyzhao/cscope_maps.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'wincent/command-t'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'altercation/vim-colors-solarized'
+
+"Git
+Plugin 'tpope/vim-fugitive'
+
+"Navigation
+Plugin 'scrooloose/nerdtree'
+Plugin 'wincent/command-t' "Fuzzy find
+
+"C++
+Plugin 'simplyzhao/cscope_maps.vim'
+
 Plugin 'Valloric/YouCompleteMe'
+
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+let g:ycm_key_list_select_completion   = ['<C-j>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+
+Plugin 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+"
+" "Snippets
+Plugin 'SirVer/ultisnips'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+" Plugin 'tomtom/tlib_vim'
+Plugin 'honza/vim-snippets'
+
+"Comments
+Plugin 'tomtom/tcomment_vim'
+
+"Development
+Plugin 'derekwyatt/vim-fswitch'
+" Plugin 'scrooloose/syntastic'
+
+"Misc
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -181,10 +213,12 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 
 
 " ctags shortcut
-autocmd FileType c,cpp          let b:ctags_kinds = '--c++-kinds=+p'
-autocmd FileType java           let b:ctags_kinds = '--java-kinds=+p'
-autocmd FileType python         let b:ctags_kinds = '--python-kinds=-i'
-noremap <F5> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --exclude='.git' --extra=+q . ; find . -type f \( -name "*.java" -or -name "*.aidl" \) > cscope.files ; cscope -b<CR>
+autocmd FileType c,cpp  let b:ctags_kinds = '--c++-kinds=+p'
+autocmd FileType c,cpp  let b:cscope_kinds = '-name "*.c" -or -name "*.cpp" -or -name "*.h" -or -name "*.hpp"'
+autocmd FileType java   let b:ctags_kinds = '--java-kinds=+p'
+autocmd FileType java   let b:cscope_kinds = '-name "*.java" -or -name "*.aidl"'
+autocmd FileType python let b:ctags_kinds = '--python-kinds=-i'
+noremap <F5> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --exclude='.git' --extra=+q . ; find . -type f \( <C-R>=b:cscope_kinds<CR> \) > cscope.files ; cscope -b<CR>
 
 "NERDTree toggle
 map <C-n> :NERDTreeToggle<CR>
@@ -201,18 +235,18 @@ nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 " Syntastic
 " =============================================
 "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <F7> :SyntasticToggleMode<CR>
-nnoremap <F8> :SyntasticCheck<CR>
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+"
+" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+" nnoremap <F7> :SyntasticToggleMode<CR>
+" nnoremap <F8> :SyntasticCheck<CR>
 
 map <C-h> 4zh " Scroll 4 characters to the left
 map <C-l> 4zl " Scroll 4 characters to the right
@@ -221,12 +255,45 @@ map <C-l> 4zl " Scroll 4 characters to the right
 " You Complete Me
 " =============================================
 "
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_confirm_extra_conf = 0
-" Don't load ycm
-let g:loaded_youcompleteme = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
+" " Don't load ycm
+" let g:loaded_youcompleteme = 1
 
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 let g:nerdtree_plugin_open_cmd = 'gnome-open'
+
+" =============================================
+" You Complete Me
+" =============================================
+"
+"Switch to the file and load it into the current window >
+nmap <silent> <Leader>of :FSHere<cr>
+<
+"Switch to the file and load it into the window on the right >
+nmap <silent> <Leader>ol :FSRight<cr>
+<
+"Switch to the file and load it into a new window split on the right >
+nmap <silent> <Leader>oL :FSSplitRight<cr>
+<
+"Switch to the file and load it into the window on the left >
+nmap <silent> <Leader>oh :FSLeft<cr>
+<
+"Switch to the file and load it into a new window split on the left >
+nmap <silent> <Leader>oH :FSSplitLeft<cr>
+<
+"Switch to the file and load it into the window above >
+nmap <silent> <Leader>ok :FSAbove<cr>
+<
+"Switch to the file and load it into a new window split above >
+nmap <silent> <Leader>oK :FSSplitAbove<cr>
+<
+"Switch to the file and load it into the window below >
+nmap <silent> <Leader>oj :FSBelow<cr>
+<
+"Switch to the file and load it into a new window split below >
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>
 
 set tags+=tags;$HOME
