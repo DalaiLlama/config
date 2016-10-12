@@ -1,1 +1,6 @@
 *.log
+*.pyc
+*.patch
+cscope.files
+cscope.out
+tags
