@@ -1,82 +1,148 @@
 set nocompatible              " be iMproved, required
 
-" =============================================
-" Plugins
-" =============================================
-"
+" Plugins {{{
 filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
-Plugin 'gmarik/vundle'
 
-"Visual
-Plugin 'sheerun/vim-polyglot'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'gmarik/vundle' " Let bundle manage its self
 
-"Git
-Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline' " Additional information bar
+" {{{ vim-airline
+set laststatus=2
+set termencoding=utf-8
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+let g:airline_powerline_fonts = 1
+" Remove incorrectly displayed arrows
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" }}}
 
-"Navigation
-Plugin 'scrooloose/nerdtree'
-Plugin 'wincent/command-t' "Fuzzy find
+Plugin 'vim-airline/vim-airline-themes' "Airline theming
 
-"C++
-Plugin 'simplyzhao/cscope_maps.vim'
+Plugin 'sheerun/vim-polyglot' "Syntax realted infomation for different file types
 
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'airblade/vim-gitgutter' "Git information in Airline
 
-" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+Plugin 'tpope/vim-fugitive' "Git commands
+
+Plugin 'altercation/vim-colors-solarized' "Solarized colours
+
+Plugin 'scrooloose/nerdtree' "Navigation tree
+" {{{ nerdtree
+map <C-n> :NERDTreeToggle<CR>
+" }}}
+
+Plugin 'derekwyatt/vim-fswitch' "Toggle between header and source
+" {{{ vim-fswitch
+"Load it into the current window
+nmap <silent> <Leader>oo :FSHere<cr>
+"Load it into the window on the left
+nmap <silent> <Leader>oh :FSLeft<cr>
+"Load it into a new window split on the left
+nmap <silent> <Leader>oH :FSSplitLeft<cr>
+"Load it into the window below
+nmap <silent> <Leader>oj :FSBelow<cr>
+"Load it into a new window split below
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>
+"Load it into the window above
+nmap <silent> <Leader>ok :FSAbove<cr>
+"Load it into a new window split above
+nmap <silent> <Leader>oK :FSSplitAbove<cr>
+"Load it into the window on the right
+nmap <silent> <Leader>ol :FSRight<cr>
+"Load it into a new window split on the right
+nmap <silent> <Leader>oL :FSSplitRight<cr>
+" }}}
+
+" Plugin 'amiel/vim-tmux-navigator' " Common navigation key between tmux and vim
+
+Plugin 'kien/ctrlp.vim' "Fuzzy file search
+
+Plugin 'rking/ag.vim' "silversearcher-ag
+" {{{ ag.vim
+let g:ag_working_path_mode="r"
+let g:ag_prg = 'ag --nogroup --nocolor --column --ignore-dir=libs'
+" }}}
+
+Plugin 'simplyzhao/cscope_maps.vim' " Cscope
+
+Plugin 'Valloric/YouCompleteMe' " YouCompleteMe
+" {{{ YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" Don't load ycm
+" let g:loaded_youcompleteme = 1
+"UltiSnips compatibility, with the helper of supertab
 let g:ycm_key_list_select_completion   = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
+" }}}
 
-Plugin 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
-"
-" "Snippets
-Plugin 'SirVer/ultisnips'
+Plugin 'SirVer/ultisnips' "Snippet manager
+" {{{ ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" }}}
 
-" Plugin 'MarcWeber/vim-addon-mw-utils'
-" Plugin 'tomtom/tlib_vim'
-Plugin 'honza/vim-snippets'
+Plugin 'honza/vim-snippets' "Snippets
 
-"Comments
-Plugin 'tomtom/tcomment_vim'
+Plugin 'ervandew/supertab' "Helper for YouCompleteMe and UltiSnips compatibility
+" {{{ supertab
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
+" }}}
 
-"Development
-Plugin 'derekwyatt/vim-fswitch'
-" Plugin 'scrooloose/syntastic'
+Plugin 'editorconfig/editorconfig-vim' "File formatting
 
-"Misc
-Plugin 'editorconfig/editorconfig-vim'
+Plugin 'tomtom/tcomment_vim' "Comments
 
 call vundle#end()
 filetype plugin indent on
 
+" }}}
 
-
-" =============================================
-" Backup
-" =============================================
-"
+" Vim configuration {{{
 set backup
 set backupdir=$HOME/.tmp/vim-backup
 set dir=$HOME/.tmp/vim-swap
 
+" Copy/paste between vim sessions
+set clipboard=unnamedplus
 
-" =============================================
-" Formatting
-" =============================================
-"
+set timeout ttimeoutlen=50
+
+" Automatically reload vimrc file
+autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
+
+" Mash jk to escape
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" Toggle folds
+nnoremap <Space> za
+" }}}
+
+" Theming {{{
+syntax on
+set term=screen-256color-bce
+set t_Co=256
+let g:solarized_termcolors=16
+if $THEME == "light"
+    set background=light
+else
+    set background=dark
+endif
+colorscheme solarized
+" }}}
+
+" Formatting {{{
 set encoding=utf-8
 
-" Spelling
 " setlocal spell spelllang=en_us
 setlocal spelllang=en_us
 
@@ -111,93 +177,16 @@ set textwidth=100
 " Git commit message lines to be 70 char long
 au FileType gitcommit set tw=70
 
-" Airline configuration
-set laststatus=2
-set termencoding=utf-8
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-let g:airline_powerline_fonts = 1
-" Remove incorrectly displayed arrows
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
-
-" Solarized color scheme
-syntax on
-set term=screen-256color-bce
-set t_Co=256
-let g:solarized_termcolors=16
-if $THEME == "light"
-    set background=light
-else
-    set background=dark
-endif
-colorscheme solarized
-
-
-" Folding
-set foldmethod=indent   "fold based on indent
-set foldnestmax=10      "deepest fold is 10 levels
-set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
-
-" =============================================
-" Functionality
-" =============================================
-"
-" Copy/paste between vim sessions
-set clipboard=unnamedplus
-
-" Automatically reload vimrc file
-"autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
-
-" Recognise *.md flies as markdown
-au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
-
-" Allow Alt key bindings
-let c='a'
-while c <= 'z'
-  exec "set <A-".c.">=\e".c
-  exec "imap \e".c." <A-".c.">"
-  let c = nr2char(1+char2nr(c))
-endw
-
-set timeout ttimeoutlen=50
-
-
-" =============================================
-" Key bindings
-" =============================================
-"
-" Escape
-inoremap jk <Esc>
-
-" Sort
-vnoremap <Leader>s :sort<CR>
-
-" " Map key to toggle opt
-" function MapToggle(key, opt)
-"  let cmd = ':set '.a:opt.'! \| set '.a:opt."?\<CR>"
-"  exec 'nnoremap '.a:key.' '.cmd
-"  exec 'inoremap '.a:key." \<C-O>".cmd
-" endfunction
-" command -nargs=+ MapToggle call MapToggle(<f-args>)
-" MapToggle <F2> hlsearch
-
-" =============================================
-" Tag list
-" =============================================
-"
-let Tlist_Use_Right_Window   = 1
-let Tlist_WinWidth = 50
-nnoremap <F2> :TlistToggle<CR>
-
-set pastetoggle=<F3>
+set fdm=marker
 
 " Remove unwanted white spaces
 map <F4> :%s/\s\+$//gc<CR>
+
+" Find replace word under cursor
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+
+" Sort
+vnoremap <Leader>s :sort<CR>
 
 " Code block handling
 vnoremap < <gv
@@ -211,89 +200,45 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
-
-" ctags shortcut
-autocmd FileType c,cpp  let b:ctags_kinds = '--c++-kinds=+p'
-autocmd FileType c,cpp  let b:cscope_kinds = '-name "*.c" -or -name "*.cpp" -or -name "*.h" -or -name "*.hpp"'
-autocmd FileType java   let b:ctags_kinds = '--java-kinds=+p'
-autocmd FileType java   let b:cscope_kinds = '-name "*.java" -or -name "*.aidl"'
-autocmd FileType python let b:ctags_kinds = '--python-kinds=-i'
-noremap <F5> :!/usr/bin/ctags -R <C-R>=b:ctags_kinds<CR> --fields=+iaS --exclude='.git' --extra=+q . ; find . -type f \( <C-R>=b:cscope_kinds<CR> \) > cscope.files ; cscope -b<CR>
-
-"NERDTree toggle
-map <C-n> :NERDTreeToggle<CR>
-
-" Binding for XPTemplate
-let g:xptemplate_key = '<Tab>'
-
-" Find replace word under cursor
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
-" nnoremap <Leader>R :bufdo %s/\<<C-r><C-w>\>//gce | update<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-
-
-" =============================================
-" Syntastic
-" =============================================
-"
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-"
-" let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-" nnoremap <F7> :SyntasticToggleMode<CR>
-" nnoremap <F8> :SyntasticCheck<CR>
-
 map <C-h> 4zh " Scroll 4 characters to the left
 map <C-l> 4zl " Scroll 4 characters to the right
+" }}}
 
-" =============================================
-" You Complete Me
-" =============================================
-"
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-let g:ycm_confirm_extra_conf = 0
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-" " Don't load ycm
-" let g:loaded_youcompleteme = 1
+" IDE {{{
+" Ctags
+autocmd FileType c,cpp,h,hpp  let b:ctags_kinds = '--c++-kinds=+p'
+autocmd FileType java         let b:ctags_kinds = '--java-kinds=+p'
+autocmd FileType python       let b:ctags_kinds = '--python-kinds=-i'
+function! UpdateCtags()
+  let l:updateCtags = '!ctags -R ' . b:ctags_kinds . ' --fields=+iaS --exclude=".git" --exclude="libs" --extra=+q .'
+  :silent exec l:updateCtags
+endfunction
 
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+" Cscope
+autocmd FileType c,cpp  let b:cscope_files = '-name "*.[cChH]" -o -name "*.[cChH]pp"'
+autocmd FileType java   let b:cscope_files = '-name "*.java" -o -name "*.aidl"'
+function! UpdateCScope()
+  let l:updateCScope = '!find . -type f ' . b:cscope_files . ' > cscope.files'
+  :silent exec l:updateCScope
+  :silent !cscope -Rbvq
+  :cs reset
+endfunction
 
-let g:nerdtree_plugin_open_cmd = 'gnome-open'
+" Update references and indexes
+function! UpdateReferences()
+    call UpdateCtags()
+    call UpdateCScope()
+    " Purely silent commands need a screen redraw
+    :redraw!
+endfunction
 
-" =============================================
-" You Complete Me
-" =============================================
-"
-"Switch to the file and load it into the current window >
-nmap <silent> <Leader>of :FSHere<cr>
-<
-"Switch to the file and load it into the window on the right >
-nmap <silent> <Leader>ol :FSRight<cr>
-<
-"Switch to the file and load it into a new window split on the right >
-nmap <silent> <Leader>oL :FSSplitRight<cr>
-<
-"Switch to the file and load it into the window on the left >
-nmap <silent> <Leader>oh :FSLeft<cr>
-<
-"Switch to the file and load it into a new window split on the left >
-nmap <silent> <Leader>oH :FSSplitLeft<cr>
-<
-"Switch to the file and load it into the window above >
-nmap <silent> <Leader>ok :FSAbove<cr>
-<
-"Switch to the file and load it into a new window split above >
-nmap <silent> <Leader>oK :FSSplitAbove<cr>
-<
-"Switch to the file and load it into the window below >
-nmap <silent> <Leader>oj :FSBelow<cr>
-<
-"Switch to the file and load it into a new window split below >
-nmap <silent> <Leader>oJ :FSSplitBelow<cr>
+" Update files and references used by Ctags and cScope
+:nnoremap <F5> :call UpdateReferences()<CR>
+" Update references automatically when saving a file
+" :autocmd BufWritePost *.[cChH]{,pp,++} call UpdateReferences()
 
 set tags+=tags;$HOME
+
+" Recognise *.md flies as markdown
+au BufNewFile,BufFilePre,BufRead *.md set filetype=markdown
+" }}}

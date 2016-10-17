@@ -2,5 +2,5 @@
 *.pyc
 *.patch
 cscope.files
-cscope.out
+*.out
 tags
