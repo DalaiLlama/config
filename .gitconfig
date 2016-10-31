@@ -4,10 +4,25 @@
 
 [core]
     editor = vim
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
 
 [color]
     ui = auto
+
+[merge]
+    tool = vimdiff
+    conflictstyle = diff3
+
+[diff]
+    tool = vimdiff
+    noprefix = true
+
+[mergetool]
+    keepBackup = false
+    writeToTemp = true
+
+[mergetool "vimdiff3"]
+    cmd = vim -f -d -c \"wincmd J\" \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
 
 [alias]
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
