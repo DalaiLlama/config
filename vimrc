@@ -23,7 +23,7 @@ let g:airline_right_sep=''
 
 Plugin 'vim-airline/vim-airline-themes' "Airline theming
 
-Plugin 'sheerun/vim-polyglot' "Syntax realted infomation for different file types
+Plugin 'sheerun/vim-polyglot' "Syntax related information for different file types
 
 Plugin 'airblade/vim-gitgutter' "Git information in Airline
 
@@ -132,10 +132,10 @@ syntax on
 set term=screen-256color-bce
 set t_Co=256
 let g:solarized_termcolors=16
-if $THEME == "light"
-    set background=light
-else
+if $THEME == "dark"
     set background=dark
+else
+    set background=light
 endif
 colorscheme solarized
 " }}}
@@ -145,6 +145,9 @@ set encoding=utf-8
 
 " setlocal spell spelllang=en_us
 setlocal spelllang=en_us
+
+" Spelling
+set spell
 
 " Show line numbers
 set number
