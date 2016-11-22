@@ -2,6 +2,13 @@ git clone https://github.com/DalaiLlama/config.git ~/Softdev/projects
 
 ## Vim
 ```
+sudo apt-get install libncurses5-dev libgnome2-dev libgnomeui-dev \
+    libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    python3-dev lua5.1 lua5.1-dev libperl-dev git
+```
+
+```
 mkdir -p ~/Softdev/projects/vim
 pushd ~/Softdev/projects/
 git clone https://github.com/vim/vim.git vim
@@ -16,6 +23,9 @@ sudo make install
 ln -s ~/.config/config/vimrc ~/.vimrc
 
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/vundle
+
+mkdir ~/.tmp/vim-backup
+mkdir ~/.tmp/vim-swap
 ```
 
 ## dot files
@@ -36,6 +46,7 @@ git clone https://github.com/seebi/dircolors-solarized.git
 git clone https://github.com/altercation/solarized.git
 git clone https://github.com/Anthony25/gnome-terminal-colors-solarized.git
 ```
+ln -s ~/Softdev/projects/dircolors-solarized/dircolors.ansi-light ~/.dircolors
 
 ## General packages
 ```

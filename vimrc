@@ -61,6 +61,10 @@ nmap <silent> <Leader>oL :FSSplitRight<cr>
 " Plugin 'amiel/vim-tmux-navigator' " Common navigation key between tmux and vim
 
 Plugin 'kien/ctrlp.vim' "Fuzzy file search
+" {{{ ctrlp
+let g:ctrlp_max_files=0
+set wildignore+=*/tmp/*,*/build/*,*.so,*.swp,*.zip
+" }}}
 
 Plugin 'rking/ag.vim' "silversearcher-ag
 " {{{ ag.vim
@@ -81,6 +85,15 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_key_list_select_completion   = ['<C-j>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
 " }}}
+
+Plugin 'artur-shaik/vim-javacomplete2'
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+" Plugin 'ervandew/eclim'
+" " {{{ eclim
+" "Eclim integration with ycm
+" let g:EclimCompletionMethod = 'omnifunc'
+" " }}}
 
 Plugin 'SirVer/ultisnips' "Snippet manager
 " {{{ ultisnips
@@ -121,7 +134,6 @@ autocmd! BufWritePost ~/.vimrc nested :source ~/.vimrc
 
 " Mash jk to escape
 inoremap jk <Esc>
-inoremap kj <Esc>
 
 " Toggle folds
 nnoremap <Space> za
