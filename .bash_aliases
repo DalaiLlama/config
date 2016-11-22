@@ -10,3 +10,5 @@ alias gitk='(gitk &)'
 
 #Shortcut to modify the vimrc file
 alias ve='vim ~/.vimrc'
+
+alias be='vim ~/.bashrc'
