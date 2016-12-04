@@ -2,31 +2,17 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH:"
 fi
 
+if [ -d "$HOME/Softdev/android/sdk" ] ; then
+    export ANDROID_HOME=$HOME/Softdev/android/sdk
+    PATH="${ANDROID_HOME}/tools:${PATH}"
+    PATH="${ANDROID_HOME}/platform-tools:${PATH}"
+fi
+
 if [ -d "$HOME/Softdev/android/sdk/platform-tools" ] ; then
-    PATH="$PATH:$HOME/Softdev/android/sdk/platform-tools"
-fi
-
-if [ -d "/opt/eclipse" ] ; then
-    export ECLIPSE_HOME=/opt/eclipse
-    PATH=${ECLIPSE_HOME}:${PATH}
-fi
-
-if [ -d "/opt/apache-ant" ] ; then
-    export ANT_HOME=/opt/apache-ant
-    PATH=${ANT_HOME}:${PATH}
-fi
-
-if [ -d "/opt/android-sdk" ] ; then
-    export ANDROID_HOME=/opt/android-sdk
-    PATH=${ANDROID_HOME}:${PATH}
+    PATH="$HOME/Softdev/android/sdk/platform-tools:$PATH"
 fi
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre
 
-export CATALINA_HOME=/opt/tomcat
-export OPENGROK_TOMCAT_BASE=/opt/tomcat
-export OPENGROK_INSTANCE_BASE=/opt/OpenGrok
-export IGNORE_PATTERNS="-i *.git -i *.so -i *.apk -i d:build -i d:.git"
-
-# Save history for all tmux windows
+# Save history from all terminals
 export PROMPT_COMMAND='history -a'

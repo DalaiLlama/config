@@ -57,8 +57,11 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='\[\033[01;33m\]\w\n\[\033[01;31m\]\$\[\033[00m\] '
+    if command -v git >/dev/null 2>&1 && [ -f ~/.bash_git_ps1 ]; then
+        . ~/.bash_git_ps1
+    else
+        PS1='\[\033[01;33m\]\w\n\[\033[01;31m\]\$\[\033[00m\] '
+    fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -89,7 +92,7 @@ fi
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 # tmux -2 session (also for screen)
 export TERM=screen-256color
-export THEME=light
+export THEME=dark
 
 # some more ls aliases
 alias ll='ls -alF'
@@ -105,21 +108,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-if [ -f ~/.bash_functions ]; then
-    . ~/.bash_functions
-fi
-
-if [ -f ~/.bash_private ]; then
-    . ~/.bash_private
-fi
-
-if [ -f ~/.bash_env ]; then
-    . ~/.bash_env
-fi
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f ~/.bash_functions ] && source ~/.bash_functions
+[ -f ~/.bash_private ] && source ~/.bash_private
+[ -f ~/.bash_env ] && source ~/.bash_env
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -132,4 +124,4 @@ if ! shopt -oq posix; then
     fi
 fi
 
-fortune | cowsay
+command -v neofetch >/dev/null 2>&1 && neofetch

@@ -34,6 +34,10 @@ Plugin 'altercation/vim-colors-solarized' "Solarized colours
 Plugin 'scrooloose/nerdtree' "Navigation tree
 " {{{ nerdtree
 map <C-n> :NERDTreeToggle<CR>
+" Find current file in NERDTree
+map <leader>n :NERDTreeFind<CR>
+
+let g:NERDTreeWinSize=60
 " }}}
 
 Plugin 'derekwyatt/vim-fswitch' "Toggle between header and source
@@ -144,10 +148,10 @@ syntax on
 set term=screen-256color-bce
 set t_Co=256
 let g:solarized_termcolors=16
-if $THEME == "dark"
-    set background=dark
+if $THEME
+    set background=$THEME
 else
-    set background=light
+    set background=dark
 endif
 colorscheme solarized
 " }}}
