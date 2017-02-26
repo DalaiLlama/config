@@ -103,6 +103,22 @@ function git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
+function pngToJpg() {
+    if command -v convert >/dev/null 2>&1; then
+        if [ $(ls -1q *.png 2>/dev/null | wc -l) -ge 1 ]; then
+            for img in *.png; do
+                filename=${img%.*}
+                echo "$img => $filename.jpg"
+                convert "$filename.png" "$filename.jpg"
+                rm "$filename.png"
+            done
+        fi
+    else
+        echo "imagemagick is needed to run pngToJpg"
+    fi
+
+}
+
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
 
