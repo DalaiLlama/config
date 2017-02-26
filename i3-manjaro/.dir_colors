@@ -84,9 +84,9 @@ TERM xterm-termite
 # Attribute codes:
 # 00=none 01=bold 03=italic 04=underscore 05=blink 07=reverse 08=concealed
 # Text color codes:
-# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# 30=black 31=red 32=green 33=orange 34=blue 35=brown 36=cyan 37=white
 # Background color codes:
-# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+# 40=black 41=red 42=green 43=orange 44=blue 45=brown 46=cyan 47=white
 #NORMAL 00	# no color code at all
 #FILE 00	# regular file: use no color at all
 RESET 0		# reset to "normal" color
@@ -111,134 +111,147 @@ STICKY 37;44	# dir with the sticky bit set (+t) and not other-writable
 # This is for files with execute permission:
 EXEC 01;31
 
-## Archives or compressed (blue + bold for compression)
-.tar    00;34
-.tgz    00;34
-.arj    00;34
-.taz    00;34
-.lzh    00;34
-.lzma   00;34
-.tlz    00;34
-.txz    00;34
-.zip    00;34
-.z      00;34
-.Z      00;34
-.dz     00;34
-.gz     00;34
-.lz     00;34
-.xz     00;34
-.bz2    00;34
-.bz     00;34
-.tbz    00;34
-.tbz2   00;34
-.tz     00;34
-.deb    00;34
-.rpm    00;34
-.jar    00;34
-.rar    00;34
-.ace    00;34
-.zoo    00;34
-.cpio   00;34
-.7z     00;34
-.rz     00;34
-.apk    00;34
-.gem    00;34
+## Archives or compressed (green + bold for compression)
+.7z              00;32
+.Z               00;32
+.ace             00;32
+.apk             00;32
+.arj             00;32
+.bz              00;32
+.bz2             00;32
+.cpio            00;32
+.deb             00;32
+.dz              00;32
+.gem             00;32
+.gz              00;32
+.jar             00;32
+.lz              00;32
+.lzh             00;32
+.lzma            00;32
+.rar             00;32
+.rpm             00;32
+.rz              00;32
+.tar             00;32
+.taz             00;32
+.tbz             00;32
+.tbz2            00;32
+.tgz             00;32
+.tlz             00;32
+.txz             00;32
+.tz              00;32
+.xz              00;32
+.z               00;32
+.zip             00;32
+.zoo             00;32
 
 # Image formats (yellow)
-.jpg    00;33
-.JPG    00;33
-.jpeg   00;33
-.gif    00;33
-.bmp    00;33
-.pbm    00;33
-.pgm    00;33
-.ppm    00;33
-.tga    00;33
-.xbm    00;33
-.xpm    00;33
-.tif    00;33
-.tiff   00;33
-.png    00;33
-.PNG    00;33
-.svg    00;33
-.svgz   00;33
-.mng    00;33
-.pcx    00;33
-.dl     00;33
-.xcf    00;33
-.xwd    00;33
-.yuv    00;33
-.cgm    00;33
-.emf    00;33
-.eps    00;33
-.CR2    00;33
-.ico    00;33
+.CR2             00;33
+.JPG             00;33
+.PNG             00;33
+.bmp             00;33
+.cgm             00;33
+.dl              00;33
+.emf             00;33
+.eps             00;33
+.gif             00;33
+.ico             00;33
+.jpeg            00;33
+.jpg             00;33
+.mng             00;33
+.pbm             00;33
+.pcx             00;33
+.pgm             00;33
+.png             00;33
+.ppm             00;33
+.svg             00;33
+.svgz            00;33
+.tga             00;33
+.tif             00;33
+.tiff            00;33
+.xbm             00;33
+.xcf             00;33
+.xpm             00;33
+.xwd             00;33
+.yuv             00;33
 
-# Files of special interest (base1)
-.tex             00;36
-.rdf             00;36
-.owl             00;36
-.n3              00;36
-.ttl             00;36
-.nt              00;36
-.torrent         00;36
-.xml             00;36
-*Makefile        00;36
-*Rakefile        00;36
+
+# Programming and files of interest
+*1               00;36
 *Dockerfile      00;36
+*Makefile        00;36
+*README          00;36
+*README.markdown 00;36
+*README.txt      00;36
+*Rakefile        00;36
 *build.xml       00;36
 *rc              00;36
-.extend.         00;36
-*1               00;36
-.nfo             00;36
-*README          00;36
-*README.txt      00;36
 *readme.txt      00;36
-.md              00;36
-*README.markdown 00;36
-.ini             00;36
-.yml             00;36
+.Xauthority      00;36
+.Xresources      00;36
+.bash_history    00;36
+.bash_logout     00;36
+.bash_profile    00;36
+.c               00;36
+.cc              00;36
 .cfg             00;36
 .conf            00;36
+.cpp             00;36
+.csv             00;36
+.cxx             00;36
+.dir_colors      00;36
+.gitconfig       00;36
+.gitignore       00;36
+.go              00;36
 .h               00;36
 .hpp             00;36
-.c               00;36
-.cpp             00;36
-.cxx             00;36
-.cc              00;36
+.ini             00;36
+.java            00;36
+.md              00;36
+.n3              00;36
+.nfo             00;36
+.nt              00;36
 .objc            00;36
-.sqlite          00;36
-.go              00;36
+.owl             00;36
+.profile         00;36
+.rdf             00;36
 .sql             00;36
-.csv             00;36
+.sqlite          00;36
+.tex             00;36
+.torrent         00;36
+.ttl             00;36
+.xml             00;36
+.xprofile        00;36
+.yml             00;36
 
 # "unimportant" files as logs and backups (base01)
-.log            00;38;5;242
-.bak            00;38;5;242
+*#              00;38;5;242
+*~              00;38;5;242
 .aux            00;38;5;242
-.lof            00;38;5;242
-.lol            00;38;5;242
-.lot            00;38;5;242
-.out            00;38;5;242
-.toc            00;38;5;242
+.bak            00;38;5;242
 .bbl            00;38;5;242
 .blg            00;38;5;242
-*~              00;38;5;242
-*#              00;38;5;242
-.part           00;38;5;242
-.incomplete     00;38;5;242
-.swp            00;38;5;242
-.tmp            00;38;5;242
-.temp           00;38;5;242
-.o              00;38;5;242
-.pyc            00;38;5;242
-.class          00;38;5;242
 .cache          00;38;5;242
+.class          00;38;5;242
+.incomplete     00;38;5;242
+.lof            00;38;5;242
+.log            00;38;5;242
+.lol            00;38;5;242
+.lot            00;38;5;242
+.o              00;38;5;242
+.old            00;38;5;242
+.out            00;38;5;242
+.part           00;38;5;242
+.pyc            00;38;5;242
+.swp            00;38;5;242
+.temp           00;38;5;242
+.tmp            00;38;5;242
+.toc            00;38;5;242
 
-# Audio formats (orange)
+# Audio formats (brown)
 .aac            00;35
 .au             00;35
 .flac           00;35
+.m4a            00;35
 .mid            00;35
 .midi           00;35
 .mka            00;35
@@ -248,7 +261,6 @@ EXEC 01;31
 .opus           00;35
 .ra             00;35
 .wav            00;35
-.m4a            00;35
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 .axa            00;35
 .oga            00;35
@@ -256,33 +268,33 @@ EXEC 01;31
 .xspf           00;35
 
 # Video formats (as audio + bold)
-.mov            00;35
 .MOV            00;35
-.mpg            00;35
-.mpeg           00;35
-.m2v            00;35
-.mkv            00;35
-.ogm            00;35
-.mp4            00;35
-.m4v            00;35
-.mp4v           00;35
-.vob            00;35
-.qt             00;35
-.nuv            00;35
-.wmv            00;35
 .asf            00;35
-.rm             00;35
-.rmvb           00;35
-.flc            00;35
 .avi            00;35
+.divx           00;35
+.flc            00;35
 .fli            00;35
 .flv            00;35
 .gl             00;35
 .m2ts           00;35
-.divx           00;35
+.m2v            00;35
+.m4v            00;35
+.mkv            00;35
+.mov            00;35
+.mp4            00;35
+.mp4v           00;35
+.mpeg           00;35
+.mpg            00;35
+.nuv            00;35
+.ogm            00;35
+.qt             00;35
+.rm             00;35
+.rmvb           00;35
+.vob            00;35
 .webm           00;35
+.wmv            00;35
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
-.axv            00;35
 .anx            00;35
+.axv            00;35
 .ogv            00;35
 .ogx            00;35
