@@ -6,6 +6,9 @@
     editor = vim
     excludesfile = ~/.gitignore
 
+[credential "https://github.com/"]
+    username = dalaillama
+
 [color]
     ui = auto
 
