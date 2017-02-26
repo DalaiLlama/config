@@ -137,6 +137,7 @@ alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --colo
 alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias more=less
 alias np='nano -w PKGBUILD'
+alias open='mimeopen -d'
 
 alias be='vim $HOME/.extend.bashrc'
 alias ce='vim $HOME/.config/compton.conf'
