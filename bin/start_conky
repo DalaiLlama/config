@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+conky -c ~/.conky/conky1.10_shortcuts &&
+conky -c ~/.conky/conky &&
+
+exit 0
