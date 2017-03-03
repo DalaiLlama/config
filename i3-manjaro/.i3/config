@@ -5,9 +5,9 @@ set $bg-color            #3A3636
 set $inactive-bg-color   #3A3636
 set $urgent-bg-color     #D19485
 set $text-color          #E6E6E6
-set $inactive-text-color #CBE6CB
+set $inactive-text-color #98A1B9
 set $urgent-text-color   #E6E6E6
-set $indicator-color     #98A1B9
+set $indicator-color     #CBE6CB
 set $border-color        #7985A3
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
@@ -42,8 +42,7 @@ bindsym $mod+Return exec terminal
 bindsym $mod+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+shift+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu='rofi -dmenu -i -p Run:'
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
