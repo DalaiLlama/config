@@ -152,6 +152,11 @@ alias printer='system-config-printer'
 alias update='yaourt -Syua'
 
 
+# Path extensions
 [[ -d ~/bin ]] && PATH="$HOME/bin:$PATH:"
+[[ -d /opt/android-sdk/platform-tools ]] && PATH="/opt/android-sdk/platform-tools:$PATH:"
+
+# Exports
+[[ -d /opt/android-sdk ]] && ANDROID_HOME="/opt/android-sdk"
 
 command -v neofetch >/dev/null 2>&1 && neofetch
