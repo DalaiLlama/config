@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-conky -c ~/.conky/conky1.10_shortcuts &&
-conky -c ~/.conky/conky &&
+conky -c ~/.conky/conky_date &&
+conky -c ~/.conky/conky_system/conky_system &&
 
 exit 0
