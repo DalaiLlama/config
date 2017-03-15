@@ -296,7 +296,7 @@ function draw_ram(cr,x_pos,y_pos, radius, r, g, b, transparency)
     cairo_fill(cr)
 
     local multipler = 7/100
-    local free_memory = math.floor((100-tonumber(conky_parse('${memperc}')))*multipler)
+    local free_memory = math.floor((tonumber(100-conky_parse('${memperc}')))*multipler)
 
     for i=1, 7 do
         cairo_move_to(cr,x_pos+radius+(8*(i-1))-2,y_pos+radius+20+align_middle+10+1+2+1)
@@ -304,7 +304,8 @@ function draw_ram(cr,x_pos,y_pos, radius, r, g, b, transparency)
         cairo_arc(cr,x_pos+radius+(8*(i-1)),y_pos+radius+20+align_middle+10+1+2+1+4,2,0*math.pi/180,(180)*math.pi/180)
         cairo_close_path(cr)
 
-        if i <= free_memory then
+        if (8-i) > free_memory then
+        -- if i <= free_memory then
             cairo_stroke_preserve(cr)
             cairo_fill(cr)
         else
@@ -316,7 +317,8 @@ function draw_ram(cr,x_pos,y_pos, radius, r, g, b, transparency)
         cairo_arc(cr,x_pos+radius+(8*(i-1)),y_pos+align_middle-4-4,2,180*math.pi/180,(0)*math.pi/180)
         cairo_close_path(cr)
 
-        if i <= free_memory then
+        if (8-i) > free_memory then
+        -- if i <= free_memory then
             cairo_stroke_preserve(cr)
             cairo_fill(cr)
         else
