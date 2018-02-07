@@ -15,7 +15,17 @@ fi
 # export USE_CCACHE=1
 # export CCACHE_DIR=~/.ccache
 
-export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+# export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64
+# export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 
 # Save history from all terminals
 export PROMPT_COMMAND='history -a'
+
+export OPENGROK_APP_SERVER=Tomcat
+export OPENGROK_CTAGS=/usr/bin/ctags
+export OPENGROK_DATA_ROOT=/opt/opengrok/data
+export OPENGROK_INSTANCE_BASE=/opt/opengrok
+export OPENGROK_READ_XML_CONFIGURATION=/opt/opengrok/etc/configuration.xml
+export OPENGROK_SRC_ROOT=/opt/opengrok/src
+export OPENGROK_TOMCAT_BASE=/opt/tomcat
+export OPENGROK_WAR_TARGET_TOMCAT=/opt/tomcat/webapps
