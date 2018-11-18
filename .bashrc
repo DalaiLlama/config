@@ -95,6 +95,20 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
+alias la='ls -la --group-directories-first --color=auto -F'
+alias ll='ls -l --group-directories-first --color=auto -F'
+
+alias open='mimeopen -d'
+
+alias fixit='sudo rm -f /var/lib/pacman/db.lck'
+alias inst='sudo pacman -S'
+alias mirrors='sudo pacman-mirrors -g'
+alias update='yaourt -Syua'
+
+alias printer='system-config-printer'
+
+# Force 256 colours in tmux
+alias tmux='tmux -2'
 
 xhost +local:root > /dev/null 2>&1
 
