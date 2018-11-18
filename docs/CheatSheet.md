@@ -9,7 +9,7 @@ Spawn subshell and run command<br>
 `<Leader>__` - TComment<br>
 `<Leader>_b` - TCommentBlock
 
-## Ultisnips 
+## Ultisnips
 cl - new class<br>
 cla - new header
 
