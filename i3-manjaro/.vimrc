@@ -205,10 +205,10 @@ set hlsearch
 set expandtab
 
 " Number of spaces used for indentation
-set shiftwidth=4
+" set shiftwidth=4
 
 " Number of spaces used for indentation when editing
-set softtabstop=4
+" set softtabstop=4
 
 " Delete over line breaks
 set backspace=indent,eol,start
@@ -217,11 +217,11 @@ set backspace=indent,eol,start
 set nowrap
 
 " Column with indication
-set colorcolumn=100
-set textwidth=100
+" set colorcolumn=100
+" set textwidth=100
 
 " Git commit message lines to be 70 char long
-au FileType gitcommit set tw=70
+" au FileType gitcommit set tw=70
 
 " Folds
 set foldmethod=indent
@@ -238,7 +238,7 @@ map <F4> :%s/\s\+$//gc<CR>
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 
 " Sort
-vnoremap <Leader>s :sort<CR>
+vnoremap <Leader>s :sort i <CR>
 
 " Code block handling
 vnoremap < <gv
