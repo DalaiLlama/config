@@ -168,18 +168,18 @@ inoremap jk <Esc>
 " }}}
 
 " Theming {{{
-" syntax on
-" try
-"   " Solarized options
-"   set t_Co=256
-"   let g:solarized_term = 1
-"   let g:solarized_termtrans=1
-"   let g:airline_theme='bubblegum'
-"   colorscheme solarized
-" catch
-" endtry
-" 
-" set background=dark
+syntax on
+try
+  " Solarized options
+  set t_Co=256
+  let g:solarized_term = 1
+  let g:solarized_termtrans=1
+  let g:airline_theme='bubblegum'
+  colorscheme solarized
+catch
+endtry
+
+set background=dark
 " }}}
 
 
