@@ -45,6 +45,7 @@ esac
 
 use_color=true
 
+
 # Set colorful PS1 only on colorful terminals.
 # dircolors --print-database uses its own built-in database
 # instead of using /etc/DIR_COLORS.  Try to use the external file
@@ -69,10 +70,15 @@ if ${use_color} ; then
 		fi
 	fi
 
+        _git_branch()
+        {
+            git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+        }
+
 	if [[ ${EUID} == 0 ]] ; then
-		PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
+		PS1='\[\033[01;34m\]\w \[\033[00;33m\]$(_git_branch)\n\[\033[01;31m\]\$\[\033[00m\] '
 	else
-		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
+		PS1='\[\033[01;34m\]\w \[\033[00;33m\]$(_git_branch)\n\[\033[01;31m\]\$\[\033[00m\] '
 	fi
 
 	alias ls='ls --color=auto'
@@ -88,13 +94,24 @@ else
 	fi
 fi
 
+
+
 unset use_color safe_term match_lhs sh
 
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
+alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
+alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
 alias more=less
+alias np='nano -w PKGBUILD'
+alias open='mimeopen -d'
+
+alias fixit='sudo rm -f /var/lib/pacman/db.lck'
+alias inst='sudo pacman -S'
+alias mirrors='sudo pacman-mirrors -g'
+alias printer='system-config-printer'
+alias update='yaourt -Syua'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -138,5 +155,28 @@ ex ()
   fi
 }
 
+pngToJpg()
+{
+    if command -v convert >/dev/null 2>&1; then
+        if [ $(ls -1q *.png 2>/dev/null | wc -l) -ge 1 ]; then
+            for img in *.png; do
+                filename=${img%.*}
+                echo "$img => $filename.jpg"
+                convert "$filename.png" "$filename.jpg"
+                rm "$filename.png"
+            done
+        fi
+    else
+        echo "imagemagick is needed to run pngToJpg"
+    fi
+
+}
+
+
 # better yaourt colors
 export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1;41;5:votes=1;44:dsc=0:other=1;35"
+
+# Path extensions
+[[ -d ~/bin ]] && PATH="$HOME/bin:$PATH:"
+
+command -v neofetch >/dev/null 2>&1 && neofetch
