@@ -161,5 +161,8 @@ export YAOURT_COLORS="nb=1:pkg=1:ver=1;32:lver=1;45:installed=1;42:grp=1;34:od=1
 
 # Path extensions
 [[ -d ~/bin ]] && PATH="$HOME/bin:$PATH:"
+[[ -d ~/Softdev/android/sdk/platform-tools ]] && PATH="$HOME/Softdev/android/sdk/platform-tools:$PATH:"
 
-command -v neofetch >/dev/null 2>&1 && neofetch
+export ANDROID_HOME="$HOME/Softdev/android/sdk"
+
+command -v neofetch >/dev/null 2>&1 && neofetch --ascii_distro arch
